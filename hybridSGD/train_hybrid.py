@@ -86,7 +86,7 @@ def train(train_dataloaders, user_idx, server, global_model, up_link):
         for cluster in range(num_clusters):
             cluster_idx = np.arange(cluster * num_per_cluster, (cluster + 1) * num_per_cluster)
             for j in range(num_per_cluster):
-                for k, (key, value) in enumerate(local_parameters[cluster_idx[j]]):
+                for k, (key, value) in enumerate(local_parameters[cluster_idx[j]].items()):
                     tmp = torch.clone(value)
                     tmp += local_parameters_copy[cluster_idx[(j - 1) % num_per_cluster]][key]
                     tmp += local_parameters_copy[cluster_idx[(j + 1) % num_per_cluster]][key]
